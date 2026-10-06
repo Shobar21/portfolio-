@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shoba Rohra | MERN Developer</title>
+<meta name="description" content="Shoba Rohra builds online stores, business websites and web apps with React, Node.js and MongoDB.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f8f7fc;--card:#fff;--ink:#1e1b2e;--muted:#625e78;--line:#e6e3f1;--accent:#5b4bd5;--accent-d:#4636b8;--tint:#eeebfb;--r:18px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;letter-spacing:-.015em;line-height:1.15}
+header{position:sticky;top:0;z-index:20;background:rgba(248,247,252,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:1.2rem}
+nav ul{display:flex;gap:28px;list-style:none;align-items:center}
+nav ul a{font-size:.92rem;color:var(--muted);transition:color .15s}
+nav ul a:hover{color:var(--accent)}
+.menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:10px;padding:6px 14px;font:inherit;font-weight:500;color:var(--ink);cursor:pointer}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:12px;font-weight:600;font-size:.95rem;border:1.5px solid var(--accent);cursor:pointer;font-family:inherit;transition:background .15s,color .15s}
+.btn.primary{background:var(--accent);color:#fff}.btn.primary:hover{background:var(--accent-d);border-color:var(--accent-d)}
+.btn.ghost{color:var(--accent);background:transparent}.btn.ghost:hover{background:var(--tint)}
+.btn.sm{padding:8px 16px;font-size:.85rem;border-radius:10px}
+nav .btn.sm{color:#fff}
+
+.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:56px;align-items:center;padding:84px 0 56px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--tint);color:var(--accent-d);font-size:.84rem;font-weight:500;padding:6px 14px;border-radius:999px;margin-bottom:22px}
+.pill i{width:8px;height:8px;border-radius:50%;background:#2e9e6b;display:block}
+.hero h1{font-size:clamp(2.3rem,5.4vw,3.8rem)}
+.lead{margin-top:22px;font-size:1.1rem;color:var(--muted);max-width:32em}
+.actions{margin-top:32px;display:flex;flex-wrap:wrap;gap:12px}
+.photo{justify-self:center;width:min(330px,82%);aspect-ratio:4/5;border-radius:28px 28px 120px 28px;background:linear-gradient(160deg,#dcd6fa,#f1e6f6);border:1px solid var(--line);overflow:hidden;box-shadow:0 24px 50px -28px rgba(70,54,184,.45)}
+.photo img{width:100%;height:100%;object-fit:cover}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-bottom:64px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px}
+.stat b{display:block;font-family:Fraunces,Georgia,serif;font-size:1.55rem;font-weight:600}
+.stat span{color:var(--muted);font-size:.9rem}
+
+.ticker{border-block:1px solid var(--line);background:var(--card);overflow:hidden;padding:16px 0}
+.track{display:flex;gap:44px;width:max-content;animation:slide 32s linear infinite;color:var(--muted);font-weight:500;font-size:.95rem}
+.track span::after{content:"\2726";margin-left:44px;color:var(--accent)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+section{padding:76px 0}
+section h2{font-size:clamp(1.7rem,3.2vw,2.3rem)}
+.sub{margin-top:12px;color:var(--muted);max-width:36em}
+.grid{display:grid;gap:20px;margin-top:38px}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px}
+.card h3{font-size:1.15rem;margin-bottom:8px}.card p{color:var(--muted);font-size:.94rem}
+.ico{width:42px;height:42px;border-radius:12px;background:var(--tint);color:var(--accent);display:grid;place-items:center;font-weight:600;margin-bottom:18px}
+
+.project{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .2s,transform .2s}
+.project:hover{box-shadow:0 20px 40px -26px rgba(70,54,184,.5);transform:translateY(-3px)}
+.thumb{aspect-ratio:16/10;background:linear-gradient(135deg,#e7e2fb,#f3e9f7);display:grid;place-items:center;font-family:Fraunces,serif;font-weight:600;color:var(--accent);overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.pbody{padding:22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.pbody h3{font-size:1.15rem}.pbody p{color:var(--muted);font-size:.92rem;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{background:var(--tint);color:var(--accent-d);font-size:.75rem;font-weight:500;padding:3px 10px;border-radius:8px}
+.links{display:flex;gap:10px;margin-top:6px;flex-wrap:wrap}
+
+.steps .card{position:relative}
+.steps .n{font-family:Fraunces,serif;font-size:1.9rem;color:var(--accent);margin-bottom:6px;display:block}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:38px}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
+.chip{border:1px solid var(--line);background:var(--bg);padding:6px 14px;border-radius:10px;font-size:.88rem}
+.cta{background:linear-gradient(150deg,#4636b8,#6a4fe0);color:#fff;border-radius:28px;padding:60px 36px;text-align:center}
+.cta h2{color:#fff}.cta .sub{color:#e0dbff;margin:14px auto 0}
+.cta .actions{justify-content:center}
+.cta .btn.primary{background:#fff;color:var(--accent-d);border-color:#fff}.cta .btn.primary:hover{background:var(--tint)}
+.cta .btn.ghost{color:#fff;border-color:rgba(255,255,255,.55)}.cta .btn.ghost:hover{background:rgba(255,255,255,.12)}
+footer{padding:30px 0 40px;text-align:center;color:var(--muted);font-size:.86rem}
+
+@media(max-width:860px){
+ .hero{grid-template-columns:1fr;padding:44px 0 36px;gap:32px}.photo{order:-1;width:220px;border-radius:24px 24px 90px 24px}
+ .stats,.g3,.g4,.two{grid-template-columns:1fr}
+ section{padding:56px 0}.cta{padding:44px 22px}
+ .menu-btn{display:block}
+ nav ul{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 24px 16px}
+ nav ul.open{display:flex}nav ul a{display:block;padding:10px 0}nav ul .btn{margin-top:8px;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.track{animation:none}*{transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav aria-label="Main">
+ <a class="brand" href="#top">Shoba Rohra</a>
+ <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">Menu</button>
+ <ul id="menu">
+  <li><a href="#services">Services</a></li><li><a href="#projects">Projects</a></li>
+  <li><a href="#process">Process</a></li><li><a href="#about">About</a></li>
+  <li><a class="btn primary sm" href="#contact">Hire me</a></li>
+ </ul></nav></div></header>
+
+<main id="top">
+<div class="wrap">
+ <div class="hero">
+  <div>
+   <span class="pill"><i></i>Available for new projects</span>
+   <h1>I build websites that bring you customers.</h1>
+   <p class="lead">Hi, I'm Shoba, a MERN stack developer. I turn your idea into a fast, good-looking website or online store that people trust, from the first sketch to launch day.</p>
+   <div class="actions">
+    <a class="btn primary" href="#contact">Start a project</a>
+    <a class="btn ghost" href="#projects">View my work</a>
+    <a class="btn ghost" href="https://drive.google.com/uc?id=1L6KdNYpgCv1HvYDrK8WrTXrL-DkVJWvM&export=download">Download CV</a>
+   </div>
+  </div>
+  <div class="photo"><img src="img/shoba.png" alt="Shoba Rohra" onerror="this.remove()"></div>
+ </div>
+ <div class="stats">
+  <div class="stat"><b>MERN stack</b><span>Full-stack development</span></div>
+  <div class="stat"><b>5 projects</b><span>Built and shared on GitHub</span></div>
+  <div class="stat"><b>Worldwide</b><span>Remote work with clients abroad</span></div>
+ </div>
+</div>
+
+<div class="ticker" aria-hidden="true"><div class="track" id="track"></div></div>
+
+<section id="services"><div class="wrap">
+ <h2>How I can help you</h2>
+ <p class="sub">Clear scope, honest timelines and regular updates while I work.</p>
+ <div class="grid g3">
+  <div class="card"><div class="ico">1</div><h3>Business websites</h3><p>A clean, mobile-friendly site for your shop, clinic or service, so customers can find and contact you.</p></div>
+  <div class="card"><div class="ico">2</div><h3>Online stores</h3><p>Product pages, cart, orders and admin tools built with React, Node.js and MongoDB.</p></div>
+  <div class="card"><div class="ico">3</div><h3>Web apps</h3><p>Dashboards, booking systems and task tools with secure login and a reliable database.</p></div>
+  <div class="card"><div class="ico">4</div><h3>Fixes and redesigns</h3><p>Slow, broken or outdated site? I repair it, speed it up and give it a fresh look.</p></div>
+  <div class="card"><div class="ico">5</div><h3>Monthly care</h3><p>Updates, bug fixes and small changes every month, so your site never falls behind.</p></div>
+  <div class="card"><div class="ico">6</div><h3>Web lessons</h3><p>One-to-one teaching for beginners who want to learn HTML, JavaScript and React.</p></div>
+ </div>
+</div></section>
+
+<section id="projects" style="padding-top:0"><div class="wrap">
+ <h2>Selected projects</h2>
+ <p class="sub">Real builds, each with the tools I used.</p>
+ <div class="grid g3" id="projectGrid"></div>
+</div></section>
+
+<section id="process" style="padding-top:0"><div class="wrap">
+ <h2>How we work together</h2>
+ <div class="grid g4 steps">
+  <div class="card"><span class="n">01</span><h3>Talk</h3><p>You tell me your goal, your audience and your deadline.</p></div>
+  <div class="card"><span class="n">02</span><h3>Plan</h3><p>I send a clear plan, timeline and price before I start.</p></div>
+  <div class="card"><span class="n">03</span><h3>Build</h3><p>I share progress often, so you can give feedback early.</p></div>
+  <div class="card"><span class="n">04</span><h3>Launch</h3><p>I deploy your site, test it and stay available for support.</p></div>
+ </div>
+</div></section>
+
+<section id="about" style="padding-top:0"><div class="wrap">
+ <h2>About me</h2>
+ <div class="two">
+  <div class="card"><h3>Who I am</h3><p>I studied computer science and specialised in web development. I teach as well, which helps me explain technical choices in plain language, so you always know what I'm building and why.</p></div>
+  <div class="card"><h3>Tools I use</h3><div class="chips" id="chips"></div></div>
+ </div>
+</div></section>
+
+<section id="contact" style="padding-top:0"><div class="wrap"><div class="cta">
+ <h2>Have a project in mind?</h2>
+ <p class="sub">Tell me what you need and I'll reply with a plan and a price.</p>
+ <div class="actions" id="contactActions"></div>
+</div></div></section>
+</main>
+<footer><div class="wrap">&copy; <span id="yr"></span> Shoba Rohra. All rights reserved.</div></footer>
+
+<script>
+/* ===== EDIT THIS PART ===== */
+const projects=[
+ {name:"Smart Buy",img:"img/smartbuy.png",tags:["React","Node.js","MongoDB"],text:"An e-commerce platform that compares one product across several websites so shoppers can pick the best price and quality. My final year project.",github:"https://github.com/Shobar21/FYP-Project",live:""},
+ {name:"Food Restaurant",img:"img/food.png",tags:["React","Node.js","MongoDB"],text:"A restaurant website with online food ordering, menu management and customer reviews.",github:"https://github.com/Shobar21/foodWebsite",live:""},
+ {name:"Health Care",img:"img/Healthcare.PNG",tags:["React","Node.js"],text:"A medical services website where visitors read health information and book appointments.",github:"https://github.com/Shobar21/HealthCare",live:""},
+ {name:"Task Master",img:"img/Taskmaster.png",tags:["React","Express","MongoDB"],text:"A task manager with add, edit, delete and view features that helps people plan their work.",github:"https://github.com/Shobar21/Task-Management",live:""},
+ {name:"Feedback App",img:"img/feedback.PNG",tags:["React"],text:"A simple app where users leave feedback and browse what others have written.",github:"https://github.com/Shobar21/feedback-app",live:""}
+];
+const contact={email:"",whatsapp:"",linkedin:"",github:"https://github.com/Shobar21"};
+const tools=["JavaScript","React.js","Node.js","Express.js","MongoDB","HTML and CSS","REST APIs","Git and GitHub"];
+/* ===== END ===== */
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const tk=["React","Node.js","MongoDB","Express","JavaScript","Responsive design","E-commerce","REST APIs","Web apps","Teaching"].map(t=>`<span>${t}</span>`).join('');
+document.getElementById('track').innerHTML=tk+tk;
+document.getElementById('chips').innerHTML=tools.map(t=>`<span class="chip">${esc(t)}</span>`).join('');
+document.getElementById('projectGrid').innerHTML=projects.map(p=>`<article class="project"><div class="thumb"><img src="${esc(p.img)}" alt="Screenshot of ${esc(p.name)}" loading="lazy" onerror="this.replaceWith(document.createTextNode('${esc(p.name)}'))"></div><div class="pbody"><h3>${esc(p.name)}</h3><div class="tags">${p.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div><p>${esc(p.text)}</p><div class="links">${p.live?`<a class="btn primary sm" href="${esc(p.live)}" target="_blank" rel="noopener">Live demo</a>`:''}<a class="btn ghost sm" href="${esc(p.github)}" target="_blank" rel="noopener">View code</a></div></div></article>`).join('');
+const it=[];
+if(contact.email)it.push(`<a class="btn primary" href="mailto:${esc(contact.email)}">Email me</a>`);
+if(contact.whatsapp)it.push(`<a class="btn ghost" href="${esc(contact.whatsapp)}" target="_blank" rel="noopener">WhatsApp</a>`);
+if(contact.linkedin)it.push(`<a class="btn ghost" href="${esc(contact.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>`);
+if(contact.github)it.push(`<a class="btn ghost" href="${esc(contact.github)}" target="_blank" rel="noopener">GitHub</a>`);
+document.getElementById('contactActions').innerHTML=it.join('');
+document.getElementById('yr').textContent=new Date().getFullYear();
+const b=document.getElementById('menuBtn'),m=document.getElementById('menu');
+b.addEventListener('click',()=>{const o=m.classList.toggle('open');b.setAttribute('aria-expanded',o)});
+m.addEventListener('click',e=>{if(e.target.tagName==='A'){m.classList.remove('open');b.setAttribute('aria-expanded',false)}});
+</script>
+</body>
+</html>
