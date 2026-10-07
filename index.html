@@ -2278,11 +2278,12 @@
         <label>Your name<input name="name" required autocomplete="name" /></label>
         <label>Your email<input type="email" name="email" required autocomplete="email" /></label>
         <label>Company or reason (optional)<textarea name="reason" rows="3"></textarea></label>
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display: none" />
         <div class="dact">
           <button type="button" class="btn ghost" id="cvCancel">Cancel</button
           ><button type="submit" class="btn primary">Send request</button>
         </div>
-        <p class="dnote">This opens your email app with the request ready to send.</p>
+        <p class="dnote" id="cvStatus" role="status">I review every request and reply to your email.</p>
       </form>
     </dialog>
 
@@ -2396,6 +2397,7 @@
         ],
       ]
       const roles = ['MERN Stack Developer', 'React Developer', 'Python Developer', 'Data and Networking Projects']
+      const web3key = '2f54c8f1-3dba-4da5-872b-9a5123e0dd8c' // paste your Web3Forms access key between the quotes
       /* ===== END ===== */
       const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])
       const col = { React: '#61dafb', 'Node.js': '#68a063', MongoDB: '#47a248', Express: '#a3a3a3' }
@@ -2617,13 +2619,50 @@
       dlg.addEventListener('click', (e) => {
         if (e.target === dlg) dlg.close()
       })
-      cvForm.addEventListener('submit', (e) => {
+      const CVNOTE = 'I review every request and reply to your email.'
+      cvForm.addEventListener('submit', async (e) => {
         e.preventDefault()
-        const d = new FormData(cvForm)
-        const body = `Hello Shoba,\n\nI would like to request your CV.\n\nName: ${d.get('name')}\nEmail: ${d.get('email')}\nCompany or reason: ${d.get('reason') || '-'}\n\nThank you.`
-        location.href = `mailto:${contact.email}?subject=${encodeURIComponent('CV request from ' + d.get('name'))}&body=${encodeURIComponent(body)}`
-        dlg.close()
-        cvForm.reset()
+        const d = new FormData(cvForm),
+          st = document.getElementById('cvStatus'),
+          btn = cvForm.querySelector('[type=submit]')
+        if (d.get('botcheck')) return
+        if (web3key) {
+          btn.disabled = true
+          st.textContent = 'Sending your request...'
+          try {
+            const r = await fetch('https://api.web3forms.com/submit', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+              body: JSON.stringify({
+                access_key: web3key,
+                subject: 'CV request from ' + d.get('name'),
+                from_name: 'Portfolio CV request',
+                name: d.get('name'),
+                email: d.get('email'),
+                message: 'I would like to request your CV.\n\nCompany or reason: ' + (d.get('reason') || '-'),
+              }),
+            })
+            const j = await r.json()
+            if (j.success) {
+              st.textContent = 'Thank you! Your request was sent. I will reply to your email soon.'
+              cvForm.reset()
+              setTimeout(() => {
+                dlg.close()
+                st.textContent = CVNOTE
+              }, 2800)
+            } else {
+              st.textContent = 'Sorry, it could not be sent. Please email me at ' + contact.email
+            }
+          } catch (err) {
+            st.textContent = 'Sorry, it could not be sent. Please email me at ' + contact.email
+          }
+          btn.disabled = false
+        } else {
+          const body = `Hello Shoba,\n\nI would like to request your CV.\n\nName: ${d.get('name')}\nEmail: ${d.get('email')}\nCompany or reason: ${d.get('reason') || '-'}\n\nThank you.`
+          location.href = `mailto:${contact.email}?subject=${encodeURIComponent('CV request from ' + d.get('name'))}&body=${encodeURIComponent(body)}`
+          dlg.close()
+          cvForm.reset()
+        }
       })
       /* highlight current section in the navbar */
       const navLinks = [...document.querySelectorAll('.navbar ul a')]
